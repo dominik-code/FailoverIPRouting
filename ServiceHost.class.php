@@ -64,17 +64,10 @@ class ServiceHost {
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getIpv4(): string {
-        return $this->ipv4;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIpv6(): string {
-        return $this->ipv6;
+    public function getIpA(): array {
+        return $this->ip_a;
     }
 
     /**

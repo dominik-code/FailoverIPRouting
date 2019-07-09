@@ -52,7 +52,7 @@ foreach ($hosts as $host) {
     $host->checkServiceHost();
     if ($best_new_host->getHostScore() < $host->getHostScore()) {
         // TODO add function for selfcheck here
-        $host_is_myself = checkIfMyself();
+        $host_is_myself = checkIfMyself($host->getIpA());
         // dont set myself as best host
         if ($host_is_myself === true) {
             continue;
@@ -63,35 +63,9 @@ foreach ($hosts as $host) {
 }
 
 
-function getOwnInterfaceIPs() {
-    // thanks to https://stackoverflow.com/questions/5800927/how-to-identify-server-ip-address-in-php for pointing out the regex. regex was modified to match ipv4 and ipv6
-    // ip a | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'
-    // will return a list of ips (ipv4 like 8.8.8.8) or/and (ipv6 like fe0e::333:eeee:eeee:eeee
-
-    // First we try getting the ips from if config or ip config. and later we try the external url as fallback
-    $ipstring = "";
-    $output = shell_exec("ifconfig | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'");
-    if ($output !== NULL) {
-        $ipstring .= $output;
-    }
-    $output = shell_exec("ip a | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'");
-    if ($output !== NULL) {
-        $ipstring .= $output;
-    }
-    if ($ipstring == "") {
-        // this should only be fallback and not used
-        echo "Warning Fallback used to get external url. <br>";
-        $output = shell_exec("curl http://ipecho.net/plain");
-        $ipstring .= $output;
-    }
-    return $ipstring;
-}
-
-function checkIfMyself() {
-    $ips = getOwnInterfaceIPs();
-    var_dump($ips);
-    foreach (MYIPS as $ip) {
-        if(strpos($ips, $ip) !== false) {
+function checkIfMyself($ip_a) {
+    foreach ($ip_a as $ip) {
+        if (in_array($ip, MYIPS) === true) {
             // note we are ourself
             return true;
         }
