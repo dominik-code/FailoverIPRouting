@@ -68,7 +68,7 @@ function getOwnInterfaceIPs() {
     // ip a | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'
     // will return a list of ips (ipv4 like 8.8.8.8) or/and (ipv6 like fe0e::333:eeee:eeee:eeee
 
-    exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'",$output);
+    $output = shell_exec("ls -la / 2>&1");
     var_dump($$output);
 }
 getOwnInterfaceIPs();
