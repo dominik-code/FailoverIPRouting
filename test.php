@@ -28,6 +28,7 @@ $host3 = new ServiceHost("Host 2", $ip_node3);
 $service1 = new Service("Apache", 80, 1, 200, "Main Apache non SSL");
 $service2 = new Service("Apache", 443, 1, 200, "Main Apache SSL");
 $service3 = new Service("Teamspeak 3 Server", 9987, 1, 5, "Main Teamspeak 3 Server");
+$service4 = new Service("Teamspeak 3 Server (serverquery)", 10011, 1, 5, "Main Teamspeak 3 Server");
 
 $host1->addService($service1);
 $host1->addService($service2);
@@ -37,6 +38,7 @@ $host2->addService($service3);
 
 
 $host3->addService($service3);
+$host3->addService($service4);
 
 $host_failover->addService($service1);
 
