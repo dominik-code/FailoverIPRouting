@@ -33,7 +33,7 @@ class ServiceHost {
         foreach ($this->ip_a as $ip) {
             echo "Checking services via IP: $ip <br>";
             foreach ($this->services as $service) {
-                $result = $service->checkStatus($this->ipv4);
+                $result = $service->checkStatus($ip);
                 $name = $service->getName();
                 $port = $service->getPort();
                 $desc = $service->getDescription();
