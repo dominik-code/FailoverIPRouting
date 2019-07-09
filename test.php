@@ -1,6 +1,8 @@
 <?php
 // this script is meant to be configured ONCE for ALL servers of a cluster and then deployed using the exact same settings for each monitor server to get the same results, the only difference should be in the config.php file setting a correct MYIPS
-
+ini_set("display_errors", 1);
+ini_set("display_startup_errors", 1);
+ini_set("error_reporting", E_ALL);
 
 
 
