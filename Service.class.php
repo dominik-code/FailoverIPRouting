@@ -63,7 +63,9 @@ class Service {
             fclose($fp);
             return true;
         } else {
-            var_dump($errStr);
+            if($errStr == "Invalid argument") {
+                echo "Note: Invalid argument supplied. Please fix this entry (mostly wrong ipv6 format) <br>";
+            }
             // It didn't work
             return false;
         }
