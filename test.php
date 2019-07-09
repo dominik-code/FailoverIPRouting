@@ -14,14 +14,16 @@ require_once './ServiceHost.class.php';
  * !!!! should be configured once and the rolled out to all monitors !!!!
  */
 
-$ip_a1 = array("12.12.11.22", "[fe80:1111:2132:3222:3323:2222:0001:0001]");
-$ip_a2 = array("8.8.8.8");
+$ip_node1 = array("12.12.11.22", "[fe80:1111:2132:3222:3323:2222:0001:0001]");
+$ip_node2 = array("8.8.8.8");
+$ip_node3 = array("193.31.25.154");
 $ip_failover = array("8.8.4.4", "[5555:4444:1222:2322:2222:2322:2222:5554]");
 
 
 $host_failover = new ServiceHost("Failover Main Host ", $ip_failover);
-$host1 = new ServiceHost("Host 1", $ip_a1);
-$host2 = new ServiceHost("Host 2", $ip_a2);
+$host1 = new ServiceHost("Host 1", $ip_node1);
+$host2 = new ServiceHost("Host 2", $ip_node2);
+$host3 = new ServiceHost("Host 2", $ip_node3);
 
 $service1 = new Service("Apache", 80, 1, 200, "Main Apache non SSL");
 $service2 = new Service("Apache", 443, 1, 200, "Main Apache SSL");
@@ -33,10 +35,13 @@ $host1->addService($service3);
 
 $host2->addService($service3);
 
+
+$host3->addService($service3);
+
 $host_failover->addService($service1);
 
 
-$hosts = array($host1, $host2);
+$hosts = array($host1, $host2, $host3);
 
 // check current failover
 $host_failover->checkServiceHost();
@@ -46,7 +51,8 @@ $best_new_host = $host_failover;
 foreach ($hosts as $host) {
     $host->checkServiceHost();
     if ($best_new_host->getHostScore() < $host->getHostScore()) {
-        $host_is_myself = true;
+        // TODO add function for selfcheck here
+        $host_is_myself = false;
         // dont set myself as best host
         if($host_is_myself) {
             continue;
