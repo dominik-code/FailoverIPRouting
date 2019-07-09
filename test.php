@@ -27,17 +27,15 @@ $host3 = new ServiceHost("Host 2", $ip_node3);
 
 $service1 = new Service("Apache", 80, 1, 200, "Main Apache non SSL");
 $service2 = new Service("Apache", 443, 1, 200, "Main Apache SSL");
-$service3 = new Service("Teamspeak 3 Server", 9987, 1, 5, "Main Teamspeak 3 Server");
 $service4 = new Service("Teamspeak 3 Server (serverquery)", 10011, 1, 5, "Main Teamspeak 3 Server");
 
 $host1->addService($service1);
 $host1->addService($service2);
-$host1->addService($service3);
 
-$host2->addService($service3);
+$host2->addService($service4);
 
 
-$host3->addService($service3);
+$host3->addService($service1);
 $host3->addService($service4);
 
 $host_failover->addService($service1);
@@ -70,8 +68,8 @@ function getOwnInterfaceIPs() {
     // ip a | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'
     // will return a list of ips (ipv4 like 8.8.8.8) or/and (ipv6 like fe0e::333:eeee:eeee:eeee
 
-    $my_current_ip=exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'");
-    echo $my_current_ip;
+    exec("ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'",$output);
+    var_dump($$output);
 }
 getOwnInterfaceIPs();
 
