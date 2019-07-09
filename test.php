@@ -67,9 +67,14 @@ function getOwnInterfaceIPs() {
     // thanks to https://stackoverflow.com/questions/5800927/how-to-identify-server-ip-address-in-php for pointing out the regex. regex was modified to match ipv4 and ipv6
     // ip a | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'
     // will return a list of ips (ipv4 like 8.8.8.8) or/and (ipv6 like fe0e::333:eeee:eeee:eeee
-
-    $output = shell_exec("ls -la / 2>&1");
-    var_dump($$output);
+    $output = shell_exec("ifconfig | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'");
+    var_dump($output);
+    $output = shell_exec("ip a | grep -Eo 'inet(6)? (addr:)?(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -Eo '(([0-9]*\.){3}[0-9]*|[0-9a-f:]{4}[0-9a-f:]*)' | grep -v '127.0.0.1'");
+    var_dump($output);
+    $output = shell_exec("ls -la");
+    var_dump($output);
+    $output = shell_exec("curl http://ipecho.net/plain");
+    var_dump($output);
 }
 getOwnInterfaceIPs();
 
