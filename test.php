@@ -23,7 +23,7 @@ $ip_failover = array("8.8.4.4", "[5555:4444:1222:2322:2222:2322:2222:5554]");
 $host_failover = new ServiceHost("Failover Main Host ", $ip_failover);
 $host1 = new ServiceHost("Host 1", $ip_node1);
 $host2 = new ServiceHost("Host 2", $ip_node2);
-$host3 = new ServiceHost("Host 2", $ip_node3);
+$host3 = new ServiceHost("Host 3", $ip_node3);
 
 $service1 = new Service("Apache", 80, 1, 200, "Main Apache non SSL");
 $service2 = new Service("Apache", 443, 1, 200, "Main Apache SSL");
