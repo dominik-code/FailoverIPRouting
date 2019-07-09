@@ -63,6 +63,7 @@ class Service {
             fclose($fp);
             return true;
         } else {
+            var_dump($errStr);
             // It didn't work
             return false;
         }
