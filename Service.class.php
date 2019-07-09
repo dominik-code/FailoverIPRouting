@@ -64,7 +64,6 @@ class Service {
             return true;
         } else {
             // It didn't work
-            fclose($fp);
             return false;
         }
     }

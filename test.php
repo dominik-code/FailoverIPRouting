@@ -11,7 +11,7 @@ require_once './config.php';
 require_once './VcpWebServiceEndUser.class.php';
 require_once './ServiceHost.class.php';
 
-$ip_a1 = array("12.12.11.22", "[fe80::232:322:333:2222:0001:0001]");
+$ip_a1 = array("12.12.11.22", "[fe80:1111:2132:3222:3323:2222:0001:0001]");
 $ip_a2 = array("8.8.8.8");
 $ip_failover = array("8.8.4.4", "[5555:4444:1222:2322:2222:2322:2222:5554]");
 
