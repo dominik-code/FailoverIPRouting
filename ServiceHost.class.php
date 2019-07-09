@@ -57,6 +57,13 @@ class ServiceHost {
     }
 
     /**
+     * @return int
+     */
+    public function getHostScore(): int {
+        return $this->hostscore;
+    }
+
+    /**
      * @return string
      */
     public function getIpv4(): string {
