@@ -12,12 +12,23 @@ require_once './ServiceHost.class.php';
 
 $scpapi = new VcpWebServiceEndUser(WSUSER,WSPASS);
 
-
+$selected = mt_rand(1,5);
+$i = 1;
 $servers = $scpapi->getVServers();
 foreach ($servers as $servername) {
-    var_dump($scpapi->getVServerInformation($servername));
-    var_dump($scpapi->getVServerIPs($servername));
+    if($selected == $i) {
+//        var_dump($scpapi->changeIPRouting(FAILOVERIPV4,FAILOVERIPV4MASK,$servername,""));
+    }
+    $interfaces = $scpapi->getVServerInformation($servername)->serverInterfaces;
+    foreach ($interfaces as $interface) {
+        if(isset($interface->ipv4IP)) {
+            var_dump($interface);
+        }
+    }
+//    var_dump($scpapi->getVServerInformation($servername));
+//    var_dump($scpapi->getVServerIPs($servername));
     echo "<br>";
+    $i++;
 }
 
 

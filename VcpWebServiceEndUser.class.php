@@ -291,4 +291,25 @@ class VcpWebServiceEndUser {
             return "Exception occured: " . $e->getMessage();
         }
     }
+
+
+    public function changeIPRouting($ip, $mask, $vserverName,$vserverInterfaceMAC ) {
+        try {
+
+
+            $params = array(
+                'loginName' => $this->loginname,
+                'password' => $this->password,
+                'routedIP' => $ip,
+                'routedMask' => $mask,
+                'destinationVserverName' => $vserverName,
+                'destinationInterfaceMAC' => $vserverInterfaceMAC,
+            );
+
+            return $this->soap_client->changeIPRouting($params);
+
+        } catch (Exception $e) {
+            return "Exception occured: " . $e->getMessage();
+        }
+    }
 }
