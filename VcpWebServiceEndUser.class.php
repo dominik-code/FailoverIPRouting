@@ -285,7 +285,7 @@ class VcpWebServiceEndUser {
                 'language' => $language,
             );
 
-            return $this->soap_client->addFirewallRule($params);
+            return $this->soap_client->getVServerInformation($params);
 
         } catch (Exception $e) {
             return "Exception occured: " . $e->getMessage();
