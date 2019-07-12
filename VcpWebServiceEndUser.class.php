@@ -22,7 +22,11 @@ class VcpWebServiceEndUser {
         $this->password = $password;
         $this->soap_client = new SOAPClient($this->wsdl_url, array('cache_wsdl' => 0));
 
-        var_dump($this->soap_client->__getFunctions());
+        $functions = $this->soap_client->__getFunctions();
+        foreach ($functions as $function) {
+            var_dump($function);
+            echo "<br>";
+        }
         // TODO error if no connection to soap server ...
     }
 

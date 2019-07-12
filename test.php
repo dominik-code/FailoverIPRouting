@@ -12,8 +12,12 @@ require_once './ServiceHost.class.php';
 
 $scpapi = new VcpWebServiceEndUser(WSUSER,WSPASS);
 
-var_dump($scpapi->getVServers());
-var_dump($scpapi->getVServerIPs());
+
+$servers = $scpapi->getVServers();
+foreach ($servers as $servername) {
+    var_dump($scpapi->getVServerIPs($servername));
+    echo "<br>";
+}
 
 
 
