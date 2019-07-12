@@ -281,7 +281,7 @@ class VcpWebServiceEndUser {
             $params = array(
                 'loginName' => $this->loginname,
                 'password' => $this->password,
-                'vserverName' => $vserverName,
+                'vservername' => $vserverName,
                 'language' => $language,
             );
 
