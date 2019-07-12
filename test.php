@@ -19,7 +19,7 @@ foreach ($servers as $servername) {
     if($selected == $i) {
 //        var_dump($scpapi->changeIPRouting(FAILOVERIPV4,FAILOVERIPV4MASK,$servername,""));
     }
-    $serverinformation = $scpapi->getVServerInformation($servername);
+    $serverinformation = $scpapi->getVServerInformation($servername)->return;
     $interfaces = $serverinformation->serverInterfaces;
     foreach ($interfaces as $interface) {
         var_dump($interface);
