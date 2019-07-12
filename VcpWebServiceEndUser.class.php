@@ -21,6 +21,8 @@ class VcpWebServiceEndUser {
         $this->loginname = $loginname;
         $this->password = $password;
         $this->soap_client = new SOAPClient($this->wsdl_url, array('cache_wsdl' => 0));
+
+        var_dump($this->soap_client->__getFunctions());
         // TODO error if no connection to soap server ...
     }
 
