@@ -10,22 +10,29 @@ require_once './VcpWebServiceEndUser.class.php';
 require_once './ServiceHost.class.php';
 
 
-$scpapi = new VcpWebServiceEndUser(WSUSER,WSPASS);
+$scpapi = new VcpWebServiceEndUser(WSUSER, WSPASS);
 
-$selected = mt_rand(1,5);
+$selected = mt_rand(1, 5);
 $i = 1;
 $servers = $scpapi->getVServers();
 foreach ($servers as $servername) {
-    if($selected == $i) {
-//        var_dump($scpapi->changeIPRouting(FAILOVERIPV4,FAILOVERIPV4MASK,$servername,""));
-    }
+
     $serverinformation = $scpapi->getVServerInformation($servername)->return;
     $interfaces = $serverinformation->serverInterfaces;
     foreach ($interfaces as $interface) {
-        var_dump($interface);
-        echo "<br>";
-        var_dump($interface->ipv4IP);
-        echo "<br>";
+        if (isset($interface->ipv4IP)) {
+            $mac = $interface->mac;
+            if ($selected == $i) {
+                var_dump($scpapi->changeIPRouting(FAILOVERIPV4, FAILOVERIPV4MASK, $servername, $mac));
+            }
+            // we are the default main external interface with ips routed to.
+
+
+        }
+//        var_dump($interface);
+//        echo "<br>";
+//        var_dump($interface->ipv4IP);
+//        echo "<br>";
     }
     echo "<br>";
 //    var_dump($serverinformation);
@@ -34,7 +41,6 @@ foreach ($servers as $servername) {
     echo "<br>";
     $i++;
 }
-
 
 
 die("Done");
