@@ -23,6 +23,7 @@ foreach ($servers as $servername) {
         if (isset($interface->ipv4IP)) {
             $mac = $interface->mac;
             if ($selected == $i) {
+                echo "Change Failover to server $servername <br>";
                 $start = microtime(true);
                 var_dump($scpapi->changeIPRouting(FAILOVERIPV4, FAILOVERIPV4MASK, $servername, $mac));
                 var_dump(microtime(true) - $start);
