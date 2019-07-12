@@ -29,6 +29,7 @@ foreach ($servers as $servername) {
                 var_dump(microtime(true) - $start);
                 var_dump($scpapi->changeIPRouting(FAILOVERIPV6, FAILOVERIPV6MASK, $servername, $mac));
                 var_dump(microtime(true) - $start);
+                mail(FAILOVERMAIL, "Failover switched routing toward $servername","Warning: The failover switched to another server because the old one has some issues. Insert SWITCHEDBY. Insert Servicereport here.");
             }
             // we are the default main external interface with ips routed to.
 
