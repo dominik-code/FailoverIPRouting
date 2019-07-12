@@ -21,9 +21,7 @@ foreach ($servers as $servername) {
     }
     $interfaces = $scpapi->getVServerInformation($servername)->serverInterfaces;
     foreach ($interfaces as $interface) {
-        if(isset($interface->ipv4IP)) {
-            var_dump($interface);
-        }
+        var_dump($interface);
     }
 //    var_dump($scpapi->getVServerInformation($servername));
 //    var_dump($scpapi->getVServerIPs($servername));
