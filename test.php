@@ -9,6 +9,15 @@ require_once './config.php';
 require_once './VcpWebServiceEndUser.class.php';
 require_once './ServiceHost.class.php';
 
+
+$scpapi = new VcpWebServiceEndUser(WSUSER,WSPASS);
+
+var_dump($scpapi);
+
+
+
+die("Done");
+
 /**
  * !!!! static config do not edit between hosts of the same cluster !!!!
  * !!!! should be configured once and the rolled out to all monitors !!!!
