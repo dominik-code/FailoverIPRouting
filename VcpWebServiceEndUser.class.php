@@ -1,6 +1,6 @@
 <?php
 
-ini_set('default_socket_timeout',360);
+ini_set('default_socket_timeout', 360);
 
 class VcpWebServiceEndUser {
 
@@ -76,6 +76,7 @@ class VcpWebServiceEndUser {
             return "Exception occured: " . $e->getMessage();
         }
     }
+
     /**
      *
      * @param String $vserverName needed
@@ -99,6 +100,7 @@ class VcpWebServiceEndUser {
             return "Exception occured: " . $e->getMessage();
         }
     }
+
     /**
      *
      * @param String $vserverName needed
@@ -122,6 +124,7 @@ class VcpWebServiceEndUser {
             return "Exception occured: " . $e->getMessage();
         }
     }
+
     /**
      *
      * @param String $vserverName needed
@@ -225,7 +228,7 @@ class VcpWebServiceEndUser {
                 'vserverName' => $vserverName
             );
 
-            return$this->soap_client->getFirewall($params);
+            return $this->soap_client->getFirewall($params);
 
         } catch (Exception $e) {
             return "Exception occured: " . $e->getMessage();
@@ -262,6 +265,24 @@ class VcpWebServiceEndUser {
                 'password' => $this->password,
                 'vserverName' => $vserverName,
                 'rule' => array($rule_params),
+            );
+
+            return $this->soap_client->addFirewallRule($params);
+
+        } catch (Exception $e) {
+            return "Exception occured: " . $e->getMessage();
+        }
+    }
+
+    public function getVServerInformation($vserverName, $language = "DE") {
+
+        try {
+
+            $params = array(
+                'loginName' => $this->loginname,
+                'password' => $this->password,
+                'vserverName' => $vserverName,
+                'language' => $language,
             );
 
             return $this->soap_client->addFirewallRule($params);

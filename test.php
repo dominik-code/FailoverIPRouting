@@ -15,6 +15,7 @@ $scpapi = new VcpWebServiceEndUser(WSUSER,WSPASS);
 
 $servers = $scpapi->getVServers();
 foreach ($servers as $servername) {
+    var_dump($scpapi->getVServerInformation($servername));
     var_dump($scpapi->getVServerIPs($servername));
     echo "<br>";
 }
