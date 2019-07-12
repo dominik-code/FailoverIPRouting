@@ -24,6 +24,7 @@ foreach ($servers as $servername) {
             $mac = $interface->mac;
             if ($selected == $i) {
                 var_dump($scpapi->changeIPRouting(FAILOVERIPV4, FAILOVERIPV4MASK, $servername, $mac));
+                var_dump($scpapi->changeIPRouting(FAILOVERIPV6, FAILOVERIPV6MASK, $servername, $mac));
             }
             // we are the default main external interface with ips routed to.
 
